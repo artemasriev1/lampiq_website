@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lampiq — Protecting Brands on Telegram</title>
+<meta name="description" content="Lampiq helps IP law firms, brand protection agencies and enterprise legal teams discover, monitor and recover trademark-related Telegram usernames.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a;
+    --white:#ffffff;
+    --lime:#C8FF3D;
+    --gray:#6b6b6b;
+    --light-gray:#e8e8e8;
+    --off-white:#fafafa;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    color:var(--black);
+    background:var(--white);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{text-decoration:none;color:inherit;}
+
+  .container{
+    max-width:1140px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* Header */
+  header{
+    position:sticky;
+    top:0;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:saturate(180%) blur(8px);
+    border-bottom:1px solid var(--light-gray);
+    z-index:100;
+  }
+
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 32px;
+    max-width:1140px;
+    margin:0 auto;
+  }
+
+  .logo{
+    font-weight:800;
+    font-size:20px;
+    letter-spacing:0.5px;
+  }
+
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:36px;
+  }
+
+  nav a{
+    font-size:14px;
+    font-weight:500;
+    color:var(--black);
+    transition:color 0.15s ease;
+  }
+
+  nav a:hover{
+    color:var(--gray);
+  }
+
+  /* Buttons */
+  .btn{
+    display:inline-block;
+    padding:14px 28px;
+    font-size:14px;
+    font-weight:600;
+    border-radius:2px;
+    transition:opacity 0.15s ease, transform 0.15s ease;
+    border:1px solid transparent;
+    cursor:pointer;
+  }
+
+  .btn:hover{
+    opacity:0.85;
+  }
+
+  .btn-primary{
+    background:var(--lime);
+    color:var(--black);
+  }
+
+  .btn-secondary{
+    background:transparent;
+    color:var(--black);
+    border:1px solid var(--black);
+  }
+
+  /* Hero */
+  .hero{
+    padding:140px 0 120px;
+    border-bottom:1px solid var(--light-gray);
+  }
+
+  .hero .container{
+    max-width:780px;
+  }
+
+  .hero-eyebrow{
+    display:inline-block;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--black);
+    background:var(--lime);
+    padding:6px 12px;
+    margin-bottom:28px;
+  }
+
+  .hero h1{
+    font-size:58px;
+    font-weight:800;
+    letter-spacing:-1.5px;
+    line-height:1.05;
+    margin-bottom:24px;
+  }
+
+  .hero p{
+    font-size:19px;
+    color:var(--gray);
+    max-width:600px;
+    margin-bottom:40px;
+  }
+
+  .hero-actions{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  /* Section base */
+  section{
+    padding:100px 0;
+    border-bottom:1px solid var(--light-gray);
+  }
+
+  .section-label{
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--gray);
+    margin-bottom:16px;
+  }
+
+  .section-title{
+    font-size:36px;
+    font-weight:800;
+    letter-spacing:-1px;
+    line-height:1.15;
+    max-width:640px;
+    margin-bottom:24px;
+  }
+
+  .section-text{
+    font-size:17px;
+    color:var(--gray);
+    max-width:620px;
+    line-height:1.7;
+  }
+
+  .section-text + .section-text{
+    margin-top:16px;
+  }
+
+  /* Problem section */
+  .problem{
+    background:var(--off-white);
+  }
+
+  /* Solution */
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:var(--light-gray);
+    margin-top:56px;
+    border:1px solid var(--light-gray);
+  }
+
+  .feature-card{
+    background:var(--white);
+    padding:36px 28px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .feature-number{
+    font-size:13px;
+    font-weight:700;
+    color:var(--gray);
+    letter-spacing:0.5px;
+  }
+
+  .feature-mark{
+    width:32px;
+    height:4px;
+    background:var(--lime);
+  }
+
+  .feature-card h3{
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:-0.3px;
+  }
+
+  .feature-card p{
+    font-size:15px;
+    color:var(--gray);
+    line-height:1.6;
+  }
+
+  /* How it works */
+  .steps{
+    margin-top:56px;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .step{
+    display:flex;
+    align-items:baseline;
+    gap:28px;
+    padding:28px 0;
+    border-top:1px solid var(--light-gray);
+  }
+
+  .step:last-child{
+    border-bottom:1px solid var(--light-gray);
+  }
+
+  .step-number{
+    font-size:14px;
+    font-weight:700;
+    color:var(--black);
+    background:var(--lime);
+    width:32px;
+    height:32px;
+    min-width:32px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    align-self:center;
+  }
+
+  .step-text{
+    font-size:18px;
+    font-weight:500;
+  }
+
+  /* Contact */
+  .contact{
+    text-align:left;
+  }
+
+  .contact-email{
+    margin-top:28px;
+    font-size:18px;
+    font-weight:600;
+    letter-spacing:-0.2px;
+  }
+
+  .contact-actions{
+    margin-top:36px;
+    display:flex;
+    align-items:center;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+
+  /* Footer */
+  footer{
+    padding:48px 0;
+  }
+
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+
+  .footer-logo{
+    font-weight:800;
+    font-size:18px;
+    margin-bottom:8px;
+  }
+
+  .footer-tagline{
+    font-size:14px;
+    color:var(--gray);
+  }
+
+  .footer-email{
+    font-size:14px;
+    color:var(--gray);
+  }
+
+  /* Responsive */
+  @media (max-width: 860px){
+    .feature-grid{
+      grid-template-columns:repeat(2, 1fr);
+    }
+    .hero h1{
+      font-size:44px;
+    }
+  }
+
+  @media (max-width: 600px){
+    .header-inner{
+      padding:18px 20px;
+    }
+    nav ul{
+      gap:20px;
+    }
+    .container{
+      padding:0 20px;
+    }
+    .hero{
+      padding:80px 0 70px;
+    }
+    .hero h1{
+      font-size:34px;
+      letter-spacing:-1px;
+    }
+    .hero p{
+      font-size:17px;
+    }
+    section{
+      padding:64px 0;
+    }
+    .section-title{
+      font-size:28px;
+    }
+    .feature-grid{
+      grid-template-columns:1fr;
+    }
+    .footer-inner{
+      flex-direction:column;
+      align-items:flex-start;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">LAMPIQ</div>
+    <nav>
+      <ul>
+        <li><a href="#problem">Problem</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <span class="hero-eyebrow">Brand Protection</span>
+    <h1>Protect Your Brand on Telegram</h1>
+    <p>Discover, monitor and recover trademark-related Telegram usernames before they become valuable digital assets owned by third parties.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="mailto:artem@lampiq.io">Book a Demo</a>
+      <a class="btn btn-secondary" href="mailto:artem@lampiq.io">Contact</a>
+    </div>
+  </div>
+</section>
+
+<section class="problem" id="problem">
+  <div class="container">
+    <div class="section-label">The Problem</div>
+    <h2 class="section-title">A new blind spot in brand protection</h2>
+    <p class="section-text">Most enterprises monitor domains, social media and marketplaces. But Telegram usernames often remain unmanaged.</p>
+    <p class="section-text">That creates a gap where brand-related usernames can be occupied, traded or sold before the company even knows they exist.</p>
+  </div>
+</section>
+
+<section id="solution">
+  <div class="container">
+    <div class="section-label">The Solution</div>
+    <h2 class="section-title">Telegram username intelligence for IP professionals</h2>
+    <p class="section-text">Lampiq helps teams audit trademark portfolios, monitor Telegram usernames and identify recovery opportunities before digital brand assets become expensive problems.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-mark"></div>
+        <h3>Portfolio Audit</h3>
+        <p>Check trademark portfolios against Telegram usernames.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-mark"></div>
+        <h3>Username Monitoring</h3>
+        <p>Track occupied, available and changing usernames.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-mark"></div>
+        <h3>Marketplace Detection</h3>
+        <p>Identify usernames that appear to be listed, traded or monetized.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-mark"></div>
+        <h3>Recovery Assessment</h3>
+        <p>Prioritize usernames that may be recoverable based on trademark ownership.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="container">
+    <div class="section-label">Process</div>
+    <h2 class="section-title">How it works</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-text">Upload or share a brand portfolio</div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-text">Lampiq scans Telegram username availability</div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-text">Receive a structured intelligence report</div>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-text">Prioritize monitoring or recovery actions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title">Start with a Telegram username audit</h2>
+    <p class="section-text">For demos, pilots or partnership discussions, contact Artem directly.</p>
+    <div class="contact-actions">
+      <a class="btn btn-primary" href="mailto:artem@lampiq.io">Email Artem</a>
+      <span class="contact-email">artem@lampiq.io</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">LAMPIQ</div>
+        <div class="footer-tagline">Protecting Brands on Telegram</div>
+      </div>
+      <div class="footer-email">artem@lampiq.io</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
